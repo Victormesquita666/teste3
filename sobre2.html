@@ -1,178 +1,153 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Detalhes do Carro</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f8f7f7;
-      margin: 0;
-      padding: 0;
-    }
+<meta charset="UTF-8">
+<title>Detalhes do Carro</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f8f7f7;
+    margin: 0;
+    padding: 0;
+  }
 
-    /* Topo com logo centralizada */
-    .topo {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #f9e800;
-      padding: 10px 0; /* altura menor */
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+  /* Topo com logo centralizada */
+  .topo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9e800;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
 
-    .topo .logo {
-      width: 80%;
-      max-width: 120px;
-      height: auto;
-      border-radius: 30px;
-    }
+  .topo .logo {
+    width: 80%;
+    max-width: 120px;
+    height: auto;
+    border-radius: 30px;
+  }
 
-    hr{ 
-      border: none;
-      height: 9px;
-      background-color: #141313;
-      margin: 0%;
-    } 
+  hr{ 
+    border: none;
+    height: 9px;
+    background-color: #141313;
+    margin: 0%;
+  } 
 
+  .container {
+    max-width: 480px; /* Página ajustada para celular */
+    margin: 20px auto;
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+  }
+
+  /* Carrossel */
+  .carrossel {
+    position: relative;
+    width: 100%;
+    height: 250px; /* menor altura para celular */
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slide {
+    min-width: 100%; /* 1 imagem por vez */
+    height: 250px;
+  }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .seta {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: white;
+    background: rgba(0,0,0,0.3);
+    padding: 8px;
+    cursor: pointer;
+    z-index: 1;
+    border-radius: 50%;
+    user-select: none;
+  }
+
+  .seta.esquerda { left: 5px; }
+  .seta.direita { right: 5px; }
+  .seta:hover { background: rgba(0,0,0,0.6); }
+
+  p, ul {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    margin: 5px 0;
+  }
+
+  ul li {
+    margin-left: 15px;
+    list-style: none;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    background-color: #179c3f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .btn:hover { background-color: #0dda5f; }
+
+  footer {
+    height: 20px;
+    background-color: #141313;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  @media (min-width: 480px) {
     .container {
-      max-width: 1200px;
-      margin: 30px auto;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+      max-width: 400px;
     }
-
-    /* Carrossel */
     .carrossel {
-      position: relative;
-      width: 100%;
-      height: 500px;
-      overflow: hidden;
-      border-radius: 10px;
-      margin-bottom: 30px;
+      height: 300px;
     }
-
-    .carrossel .slides {
-      display: flex;
-      width: 100%;
-      transition: transform 0.5s ease-in-out;
+    .slide {
+      height: 300px;
     }
+  }
 
-    .carrossel .slide {
-      min-width: 33.33%;
-      height: 500px;
-    }
-
-    .carrossel .slide img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .carrossel .seta {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 40px;
-      color: white;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 10px;
-      cursor: pointer;
-      z-index: 1;
-      user-select: none;
-      border-radius: 50%;
-    }
-
-    .carrossel .seta:hover {
-      background: rgba(0, 0, 0, 0.6);
-    }
-
-    .carrossel .seta.esquerda {
-      left: 10px;
-    }
-
-    .carrossel .seta.direita {
-      right: 10px;
-    }
-
-    p{
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    } 
-
-    .btn {
-      display: inline-block;
-      padding: 18px 24px;
-      background-color: #179c3f;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-      position: relative;
-      margin-top: 20px;
-    }
-
-    .btn:hover {
-      background-color: #0dda5f;
-    } 
-
-    .butom{
-      position: relative;
-      height: 30px;
-    }
-
-    /* --- RESPONSIVO --- */
-    @media (max-width: 768px) {
-      .carrossel {
-        height: 350px;
-      }
-      .carrossel .slide {
-        min-width: 50%;
-        height: 350px;
-      }
-      .btn {
-        padding: 14px 20px;
-        font-size: 14px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .carrossel {
-        height: 250px;
-      }
-      .carrossel .slide {
-        min-width: 100%;
-        height: 250px;
-      }
-      .btn {
-        padding: 12px 18px;
-        font-size: 12px;
-      }
-    }
-
-    /* Rodapé pequeno */
-    footer {
-      height: 20px;
-      background-color: #141313;
-      width: 100%;
-      margin-top: 30px;
-    }
-  </style>
+</style>
 </head>
-<body> 
+<body>
 
   <div class="topo">
     <img src="imagens/logo.jpg" class="logo" alt="Logo RDG Veículos">
   </div>
 
-  <hr> 
+  <hr>
 
   <div class="container">
-    <!-- Carrossel de Imagens -->
+    <!-- Carrossel -->
     <div class="carrossel">
       <div class="slides" id="slides">
         <div class="slide"><img src="imagens/onixrdg1.jpg.jpg" alt="Foto 1"></div>
@@ -180,7 +155,7 @@
         <div class="slide"><img src="imagens/onixrdg5.jpg" alt="Foto 3"></div>
         <div class="slide"><img src="imagens/onixrdg6.jpg" alt="Foto 4"></div>
         <div class="slide"><img src="imagens/onixrdg3.jpg" alt="Foto 5"></div>
-        <div class="slide"><img src="imagens/onixrdg2.jpg" alt="Foto 6"></div> 
+        <div class="slide"><img src="imagens/onixrdg2.jpg" alt="Foto 6"></div>
         <div class="slide"><img src="imagens/onixrdg7.jpg.jpg" alt="Foto 7"></div>
       </div>
       <div class="seta esquerda" onclick="mudarSlide(-1)">❮</div>
@@ -201,7 +176,7 @@
       <li>✅ Multimídia original de fábrica</li>
       <li>✅ Faróis de milha</li>
       <li>✅ Sensor de Ré</li>
-      <li>✅ Freios ABS</li> 
+      <li>✅ Freios ABS</li>
       <li>✅ Piloto Automático</li>
       <li>✅ Volante Multifuncional</li>
       <li>✅ Mala Elétrica</li>
@@ -209,9 +184,8 @@
       <li>✅ Rodas Aro 17</li>
     </ul>
 
-    <div class="butom"> 
-      <a href="https://wa.me/5583996701673" class="btn" target="_blank">Fazer Simulação</a> 
-    </div>
+    <a href="https://wa.me/5583996701673" class="btn" target="_blank">Fazer Simulação</a>
+
   </div>
 
   <footer></footer>
@@ -228,5 +202,7 @@
       slides.style.transform = `translateX(-${slideAtual * 100}%)`;
     }
   </script>
+
 </body>
 </html>
+
